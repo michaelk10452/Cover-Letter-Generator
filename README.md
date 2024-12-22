@@ -39,7 +39,7 @@ A sophisticated application that generates tailored cover letters by analyzing y
 ### Setup
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/cover-letter-generator.git
+git clone https://github.com/michaelk10452/cover-letter-generator.git
 cd cover-letter-generator
 
 # Create and activate virtual environment
