@@ -1,0 +1,20 @@
+{date}
+
+{recruiter_name}
+{company_name}
+{company_address}
+
+Dear {recipient},
+
+{opening_paragraph}
+
+{body_paragraph_1}
+
+{body_paragraph_2}
+
+{closing_paragraph}
+
+Sincerely,
+{candidate_name}
+{candidate_email}
+{candidate_phone}
