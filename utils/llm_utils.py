@@ -8,11 +8,14 @@ from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from io import BytesIO
 import datetime
 import re
+from config import APP_SETTINGS
 
 class OllamaLLM:
-    def __init__(self, model_name: str = "llama3.2:latest", host: str = "http://localhost:11434"):
-        self.model_name = model_name
-        self.host = host
+    def __init__(self):
+        self.model_name = APP_SETTINGS['model_name']
+        self.host = APP_SETTINGS['ollama_host']
+        self.temperature = APP_SETTINGS['temperature']
+        self.max_tokens = APP_SETTINGS['max_tokens']
         self._verify_model_availability()
 
     def _verify_model_availability(self):
@@ -34,7 +37,7 @@ class OllamaLLM:
                     "prompt": prompt,
                     "stream": False,
                     "options": {
-                        "temperature": 0.7,
+                        "temperature": self.temperature,
                         "top_p": 0.9,
                         "top_k": 40,
                         "num_ctx": 4096,
@@ -72,9 +75,8 @@ class OllamaLLM:
         
         # Format the letter
         formatted_parts = [
-            current_date,
-            "\nRecruiting Team\nSamsung Research America\n2 West Santa Clara Street\nSan Jose, CA 95113\n",
-            "\nDear Hiring Manager,\n"
+            current_date + "\n",  # Add newline after date
+            "Dear Hiring Manager,\n"  # Single greeting
         ]
         
         # Add body paragraphs (exclude anything that looks like a header or signature)
@@ -93,31 +95,9 @@ class OllamaLLM:
         # Add signature
         formatted_parts.extend([
             "\n\nSincerely,",
-            "\nMichael Kurdahi",
-            "949-514-5802",
-            "michaelkurdahi42@gmail.com"
-        ])
-        
-        return "\n".join(formatted_parts)
-        
-        # Construct the letter
-        formatted_parts = [
-            current_date,
-            "\nRecruiting Team\nSamsung Research America\n2 West Santa Clara Street\nSan Jose, CA 95113\n",
-            "\nDear Hiring Manager,\n"
-        ]
-        
-        # Add body paragraphs
-        for p in paragraphs:
-            if not any(header in p for header in ["Dear Hiring Manager", "Sincerely", current_date]):
-                formatted_parts.append("\n" + p)
-        
-        # Add signature
-        formatted_parts.extend([
-            "\n\nSincerely,",
-            "\nMichael Kurdahi",
-            "949-514-5802",
-            "michaelkurdahi42@gmail.com"
+            "\n[Your Name]",
+            "[Your Email]",
+            "[Your Phone]"
         ])
         
         return "\n".join(formatted_parts)
@@ -191,7 +171,7 @@ class OllamaLLM:
                     "messages": history + [{"role": "user", "content": prompt}],
                     "stream": False,
                     "options": {
-                        "temperature": 0.7,
+                        "temperature": self.temperature,
                         "top_p": 0.9
                     }
                 }

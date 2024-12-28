@@ -1,112 +1,116 @@
-# AI Cover Letter Generator
+# Intelligent Cover Letter Generator
 
-A sophisticated application that generates tailored cover letters by analyzing your professional documents and online presence. Built with Python and modern AI technologies, it creates personalized cover letters that authentically represent your experience and qualifications.
+This application helps generate personalized cover letters by analyzing your resume, job descriptions, and additional materials using AI.
 
 ## Features
 
-### Document Processing
-- PDF resume parsing and analysis
-- Multiple document support (transcripts, certifications)
-- Automatic skill and experience extraction
-- Structured job description analysis
+- Resume parsing and analysis
+- Job description processing
+- Company research integration
+- Portfolio analysis (GitHub, Behance)
+- Customizable tone and style
+- PDF and text export options
 
-### Portfolio Integration
-- GitHub repository analysis
-  - Project detection and analysis
-  - Language identification
-  - Repository statistics
-- Behance portfolio integration
-- Support for additional portfolio platforms
+## Prerequisites
 
-### Company Research
-- Automatic company name detection
-- Manual company name override
-- Verified company information integration
-- Industry and focus area analysis
+- Python 3.12 or higher
+- Virtual environment tool (venv recommended)
+- Ollama installed and running locally (see [Ollama Installation](#ollama-setup))
 
-### Customization
-- Multiple tone options (Professional, Enthusiastic, Confident, Conservative)
-- Writing style selection (Standard, Creative, Technical, Executive)
-- Format customization
-- Export options (PDF, Text)
+### Ollama Setup
+
+1. Install Ollama:
+   ```bash
+   # macOS or Linux
+   curl https://ollama.ai/install.sh | sh
+
+   # Windows
+   # Download from https://ollama.ai/download/windows
+   ```
+
+2. Start Ollama:
+   ```bash
+   ollama serve
+   ```
+
+3. Pull the required model:
+   ```bash
+   ollama pull llama3.2:latest
+   ```
+
+Note: Ollama must be running (`ollama serve`) before starting the application.
 
 ## Installation
 
-### Prerequisites
-- Python 3.12 or higher
-- Ollama (for local LLM deployment)
-
-### Setup
+1. Clone the repository:
 ```bash
-# Clone the repository
-git clone https://github.com/michaelk10452/cover-letter-generator.git
+git clone https://github.com/yourusername/cover-letter-generator.git
 cd cover-letter-generator
-
-# Create and activate virtual environment
-python -m venv cover_letter_env
-source cover_letter_env/bin/activate  # On Windows: cover_letter_env\Scripts\activate
-
-# Install dependencies
-pip install -r requirements.txt
-
-# Install Ollama (if not already installed)
-# For Linux/WSL:
-curl https://ollama.ai/install.sh | sh
-# For MacOS:
-brew install ollama
-
-# Pull the required model
-ollama pull llama3.2:latest
 ```
+
+2. Create and activate a virtual environment:
+```bash
+# Create virtual environment
+python -m venv cover_letter_env
+
+# Activate virtual environment
+# On Windows:
+cover_letter_env\Scripts\activate
+# On macOS/Linux:
+source cover_letter_env/bin/activate
+```
+
+3. Install required packages:
+```bash
+pip install -r requirements.txt
+```
+
+## Running the Application
+
+**Important**: The application must be run using Python's module system to ensure proper environment usage:
+
+```bash
+python -m streamlit run app.py
+```
+
+Do not run simply with `streamlit run app.py` as this may use the wrong Python environment.
+
+The application will be available at:
+- Local URL: http://localhost:8501
+- Network URL: http://192.168.x.x:8501 (for accessing from other devices on your network)
 
 ## Usage
 
-1. Start the application:
-```bash
-streamlit run app.py
+1. Upload your resume (PDF format)
+2. Paste the job description
+3. Enter the company name
+4. (Optional) Add portfolio links or additional documents
+5. Select your preferred tone and style
+6. Click "Generate Cover Letter"
+7. Review and download the generated cover letter in PDF or text format
+
+## Project Structure
+
 ```
-
-2. Upload Documents:
-   - Primary resume (PDF)
-   - Additional supporting documents
-   - Portfolio links (GitHub, Behance)
-
-3. Enter Job Information:
-   - Paste job description
-   - Enter/verify company name
-   - Select research preferences
-
-4. Customize Output:
-   - Choose tone and style
-   - Select information to include
-   - Review portfolio analysis
-
-5. Generate and Export:
-   - Review generated cover letter
-   - Export as PDF or text
-   - Check sourced information
-
-## Technical Architecture
-```
-cover_letter_generator/
-├── app.py                  # Main application
+cover-letter-generator/
+├── app.py                  # Main Streamlit application
 ├── utils/
-│   ├── document_processor.py  # Document handling
-│   ├── llm_utils.py          # LLM integration
-│   ├── portfolio_agent.py    # Portfolio analysis
-│   ├── research_agent.py     # Company research
-│   └── prompt_templates.py   # Prompt engineering
-├── templates/              # Letter templates
-└── tests/                 # Test suite
+│   ├── __init__.py
+│   ├── document_processor.py
+│   ├── llm_utils.py
+│   ├── portfolio_agent.py
+│   ├── prompt_templates.py
+│   └── research_agent.py
+├── requirements.txt
+└── README.md
 ```
 
-## Technology Stack
-- **Core**: Python, Streamlit
-- **AI/ML**: Ollama, LangChain
-- **Document Processing**: PyPDF, PDFMiner
-- **Web Integration**: BeautifulSoup4, Requests
-- **Data Analysis**: NLTK, spaCy
-- **Export**: ReportLab
+## Troubleshooting
+
+If you encounter a `ModuleNotFoundError`, ensure you:
+1. Have activated your virtual environment
+2. Installed all requirements using `pip install -r requirements.txt`
+3. Are running the application using `python -m streamlit run app.py`
 
 ## Contributing
 Contributions welcome! Please feel free to submit a Pull Request.

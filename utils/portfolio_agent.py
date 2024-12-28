@@ -4,12 +4,13 @@ from typing import List, Dict, Tuple
 from urllib.parse import urlparse
 import re
 import streamlit as st
+from config import RESEARCH_SETTINGS
 
 class PortfolioAgent:
     def __init__(self):
-        self.headers = {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
-        }
+        self.headers = {'User-Agent': RESEARCH_SETTINGS['user_agent']}
+
+
 
     def analyze_portfolio(self, urls: List[str]) -> Tuple[str, Dict]:
         """Analyze portfolio links and extract relevant information."""

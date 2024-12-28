@@ -1,4 +1,4 @@
-import pdfminer.high_level
+from pdfminer.high_level import extract_text as pdfminer_extract_text
 from typing import Dict, List
 import re
 from langchain.text_splitter import RecursiveCharacterTextSplitter
@@ -14,10 +14,12 @@ class DocumentProcessor:
     def extract_text_from_pdf(self, pdf_path: str) -> str:
         """Extract text content from PDF file."""
         try:
-            text = pdfminer.high_level.extract_text(pdf_path)
+            text = pdfminer_extract_text(pdf_path)  # Use the aliased import
             return self._clean_text(text)
         except Exception as e:
             raise Exception(f"Error extracting text from PDF: {str(e)}")
+
+
 
     def process_job_description(self, job_description: str) -> Dict:
         """Process and structure job description text."""

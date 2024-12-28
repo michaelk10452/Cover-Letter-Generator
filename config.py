@@ -4,6 +4,10 @@ from dotenv import load_dotenv
 # Load environment variables
 load_dotenv()
 
+# Path settings
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+CACHE_DIR = os.path.join(BASE_DIR, 'cache')
+
 # Application settings
 APP_SETTINGS = {
     'debug': os.getenv('DEBUG', 'False') == 'True',
@@ -35,4 +39,14 @@ STREAMLIT_SETTINGS = {
     'page_icon': '📝',
     'layout': 'wide',
     'initial_sidebar_state': 'expanded',
+}
+
+# Company research settings
+RESEARCH_SETTINGS = {
+    'news_api_key': os.getenv('NEWS_API_KEY', ''),
+    'cache_expiration': 24 * 60 * 60,  # 24 hours in seconds
+    'cache_dir': CACHE_DIR,  # Now using the CACHE_DIR constant
+    'max_news_results': 3,
+    'enable_web_scraping': True,
+    'user_agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
 }
